@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as Styled from './styles';
 import Card from 'core/components/Card';
 import Eye from 'assets/Images/Eye.png';
@@ -9,15 +9,19 @@ import Dracula from 'assets/Images/Dracula.png';
 import Bones from 'assets/Images/Bones.png';
 
 const CardsController = () => {
+  const [isBack, setIsBack] = useState(true);
+  const toggleIsBack = () => {
+    setIsBack(!isBack);
+  };
   return (
     <Styled.Container>
-      <Card isBack />
-      <Card picture={Eye} />
+      <Card isBack={isBack} picture={Eye} onCardClick={toggleIsBack} />
+      {/* <Card picture={Eye} />
       <Card picture={Ghost} />
       <Card picture={Pumpkin} />
       <Card picture={Skull} />
       <Card picture={Dracula} />
-      <Card picture={Bones} />
+      <Card picture={Bones} /> */}
     </Styled.Container>
   );
 };
