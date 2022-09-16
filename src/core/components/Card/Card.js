@@ -1,20 +1,29 @@
 import React from 'react';
 import * as Styled from './styes';
 import Cobweb from 'assets/Images/Cobweb.png';
+import CobwebGrey from 'assets/Images/CobwebGrey.png';
 import Spider from 'assets/Images/Spider.png';
 
-const images = ['isTopRight', 'isBottomRight', 'isBottomLeft', 'isTopLeft'];
-const Card = () => {
+const corners = ['isTopRight', 'isBottomRight', 'isBottomLeft', 'isTopLeft'];
+const Card = props => {
+  const {picture, isBack} = props;
   return (
-    <Styled.Card>
-      {images.map((image, index) => (
-        <Styled.ImageContainer position={image} key={index}>
-          <Styled.Image src={Cobweb} position={image} />
+    <Styled.Card isBack={isBack}>
+      {corners.map((corner, index) => (
+        <Styled.ImageContainer position={corner} key={index}>
+          <Styled.Image src={isBack ? Cobweb : CobwebGrey} position={corner} />
         </Styled.ImageContainer>
       ))}
-      <Styled.SpiderContainer>
-        <Styled.Spider src={Spider} />
-      </Styled.SpiderContainer>
+
+      {isBack === true ? (
+        <Styled.SpiderContainer>
+          <Styled.Spider src={Spider} />
+        </Styled.SpiderContainer>
+      ) : (
+        <Styled.PictureContainer>
+          <Styled.Picture src={picture} />
+        </Styled.PictureContainer>
+      )}
     </Styled.Card>
   );
 };

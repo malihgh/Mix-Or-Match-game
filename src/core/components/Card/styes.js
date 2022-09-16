@@ -3,10 +3,11 @@ import styled from 'styled-components';
 export const Card = styled.div`
   width: 150px;
   height: 200px;
-  background-color: black;
+  background-color: ${props => (props.isBack ? 'black' : '#FFBB89')};
   position: relative;
-  border: 2px #ff6d00 solid;
+  border: ${props => (props.isBack ? ' 2px #ff6d00 solid' : ' 2px #333 solid')};
   border-radius: 8px;
+  margin: 5px;
 `;
 
 export const ImageContainer = styled.div`
@@ -49,5 +50,16 @@ export const Spider = styled.img`
   height: 145px;
   ${Card}:hover & {
     height: 150px;
+  }
+`;
+export const PictureContainer = styled.div`
+  position: absolute;
+  top: 25%;
+  left: 19%;
+`;
+export const Picture = styled.img`
+  height: 88px;
+  ${Card}:hover & {
+    height: 90px;
   }
 `;
