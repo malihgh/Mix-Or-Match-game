@@ -18,7 +18,7 @@ const Card = props => {
       <Styled.Container>
         <Styled.CardContainer isBack={isBack}>
           {isBack === true ? (
-            <Styled.Card1000 isBack onClick={handleCardClick}>
+            <Styled.FlipCard isBack onClick={handleCardClick}>
               <Styled.Card isBack>
                 {corners.map((corner, index) => (
                   <Styled.ImageContainer position={corner} key={index}>
@@ -30,9 +30,9 @@ const Card = props => {
                   <Styled.Spider src={Spider} />
                 </Styled.SpiderContainer>
               </Styled.Card>
-            </Styled.Card1000>
+            </Styled.FlipCard>
           ) : (
-            <Styled.Card1000 isBack={false}>
+            <Styled.FlipCard isBack={false}>
               <Styled.Card isBack={false}>
                 {corners.map((corner, index) => (
                   <Styled.ImageContainer position={corner} key={index}>
@@ -44,7 +44,7 @@ const Card = props => {
                   <Styled.Picture src={picture} />
                 </Styled.PictureContainer>
               </Styled.Card>
-            </Styled.Card1000>
+            </Styled.FlipCard>
           )}
         </Styled.CardContainer>
       </Styled.Container>

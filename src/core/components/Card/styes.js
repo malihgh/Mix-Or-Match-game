@@ -17,7 +17,7 @@ export const CardContainer = styled.div`
   transition: transform 1s;
   transform: ${props => props.isBack && 'rotateY(180deg)'};
 `;
-export const Card1000 = styled.div`
+export const FlipCard = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
