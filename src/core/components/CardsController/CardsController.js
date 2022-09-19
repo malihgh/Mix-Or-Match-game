@@ -6,6 +6,7 @@ import {cards} from 'core/components/CardsController/data/cards';
 const CardsController = () => {
   const [cardsState, setCardsState] = useState(shuffle());
   const [flipCounter, setFlipCounter] = useState(0);
+  const [timer, setTimer] = useState(90);
 
   function shuffle() {
     let shuffledArray = cards
@@ -64,11 +65,28 @@ const CardsController = () => {
     }
   }, [checkIsMatch, viewCard]);
 
+  useEffect(() => {
+    const won = cardsState.filter(e => e.isBack === undefined);
+    if (won.length === cards.length) {
+      console.log('game is won');
+    }
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer(timer => timer - 1);
+      if (timer <= 0) setTimer(0);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timer]);
+
   return (
     <>
-      <div> flip:{flipCounter}</div>
+      <Styled.Text> Timer {timer}</Styled.Text>
 
-      <Styled.Container>
+      <Styled.Text> flip {flipCounter}</Styled.Text>
+
+      <Styled.CardContainer>
         {cardsState.map(card => (
           <Card
             key={card.id}
@@ -78,7 +96,7 @@ const CardsController = () => {
             onCardClick={showCard}
           />
         ))}
-      </Styled.Container>
+      </Styled.CardContainer>
     </>
   );
 };
