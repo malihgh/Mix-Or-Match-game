@@ -1,24 +1,14 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import * as Styled from './styles';
 import Card from 'core/components/Card';
-import {cards} from 'core/components/CardsController/data/cards';
 
-const CardsController = () => {
-  const [cardsState, setCardsState] = useState(shuffle());
-  const [flipCounter, setFlipCounter] = useState(0);
-  const [timer, setTimer] = useState(90);
-
-  function shuffle() {
-    let shuffledArray = cards
-      .map(value => ({value, sort: Math.random()}))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({value}) => value);
-    return shuffledArray;
-  }
+const CardsController = props => {
+  const {data, isFlipped} = props;
+  const [cardsState, setCardsState] = useState(data);
 
   const showCard = id => {
     if (viewCard.length === 0 || viewCard.length % 2 !== 0) {
-      setFlipCounter(flipCounter => flipCounter + 1);
+      isFlipped();
 
       const newState = cardsState.map(obj => {
         if (obj.id === id) {
@@ -65,27 +55,16 @@ const CardsController = () => {
     }
   }, [checkIsMatch, viewCard]);
 
-  useEffect(() => {
-    const won = cardsState.filter(e => e.isBack === undefined);
-    if (won.length === cards.length) {
-      console.log('game is won');
-    }
-  });
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer(timer => timer - 1);
-      if (timer <= 0) setTimer(0);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [timer]);
+  const isWon =
+    cardsState.filter(e => e.isBack === undefined).length === data.length;
+  // useEffect(() => {
+  //   if (isWon || timer === 0) {
+  //     console.log('game is finished');
+  //   }
+  // });
 
   return (
     <>
-      <Styled.Text> Timer {timer}</Styled.Text>
-
-      <Styled.Text> flip {flipCounter}</Styled.Text>
-
       <Styled.CardContainer>
         {cardsState.map(card => (
           <Card
