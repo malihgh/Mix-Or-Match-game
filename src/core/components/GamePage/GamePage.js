@@ -39,8 +39,6 @@ const GamePage = () => {
           <Styled.Text> Timer {timer}</Styled.Text>
           <Styled.Text> flip {flipCounter}</Styled.Text>
         </Styled.TextContainer>
-        {!isWon && timer === 0 && <div>You lost</div>}
-        {isWon && <div>You Won!</div>}
         <CardsController data={shuffle()} isFlipped={isFlipped} />
       </Styled.Container>
     </div>
