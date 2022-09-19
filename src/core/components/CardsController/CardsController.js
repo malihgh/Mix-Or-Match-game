@@ -4,8 +4,16 @@ import Card from 'core/components/Card';
 import {cards} from 'core/components/CardsController/data/cards';
 
 const CardsController = () => {
-  const [cardsState, setCardsState] = useState(cards);
+  const [cardsState, setCardsState] = useState(shuffle());
   const [flipCounter, setFlipCounter] = useState(0);
+
+  function shuffle() {
+    let shuffledArray = cards
+      .map(value => ({value, sort: Math.random()}))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({value}) => value);
+    return shuffledArray;
+  }
 
   const showCard = id => {
     if (viewCard.length === 0 || viewCard.length % 2 !== 0) {
