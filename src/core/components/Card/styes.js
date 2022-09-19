@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from 'core/consts/colors';
 
 export const Container = styled.div`
   width: 150px;
@@ -28,8 +29,10 @@ export const Card = styled.div`
   width: 150px;
   height: 200px;
   position: relative;
-  background-color: ${props => (props.isBack ? 'black' : '#FFBB89')};
-  border: ${props => (props.isBack ? ' 2px #ff6d00 solid' : ' 2px #333 solid')};
+  background-color: ${props => (props.isBack ? 'black' : colors.ivory)};
+  border-color: ${props => (props.isBack ? colors.orange : colors.gray)};
+  border-width: 2px;
+  border-style: solid;
   border-radius: 8px;
 `;
 
