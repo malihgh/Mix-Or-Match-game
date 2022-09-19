@@ -41,7 +41,7 @@ const Card = props => {
                 ))}
 
                 <Styled.PictureContainer>
-                  <Styled.Picture src={picture} />
+                  <Styled.Picture src={picture} isBack={isBack} />
                 </Styled.PictureContainer>
               </Styled.Card>
             </Styled.FlipCard>

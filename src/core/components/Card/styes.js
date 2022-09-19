@@ -83,6 +83,38 @@ export const PictureContainer = styled.div`
 `;
 export const Picture = styled.img`
   height: 88px;
+
+  @-webkit-keyframes swinging {
+    0% {
+      -webkit-transform: rotate(15deg);
+    }
+    50% {
+      -webkit-transform: rotate(-10deg);
+    }
+    100% {
+      -webkit-transform: rotate(15deg);
+    }
+  }
+
+  @keyframes swinging {
+    0% {
+      transform: rotate(15deg);
+    }
+    50% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(15deg);
+    }
+  }
+
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-animation: ${props =>
+    props.isBack === undefined && 'swinging 1s ease-in-out forwards infinite'};
+
+  animation: ${props =>
+    props.isBack === undefined && 'swinging 1s ease-in-out forwards infinite'};
   ${Card}:hover & {
     height: 90px;
   }
