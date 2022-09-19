@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colors from 'core/consts/colors';
+import colors from 'core/constants/colors';
 
 export const Container = styled.div`
   width: 150px;
