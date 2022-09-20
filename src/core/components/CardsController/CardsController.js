@@ -1,15 +1,24 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState, useCallback, useRef} from 'react';
 import * as Styled from './styles';
 import Card from 'core/components/Card';
+import flipSound from 'assets/Audio/flip.wav';
+import matchSound from 'assets/Audio/match.wav';
 
 const CardsController = props => {
-  const {data, isFlipped} = props;
+  const {data, isFlipped, checkIsWon} = props;
   const [cardsState, setCardsState] = useState(data);
+
+  const flip = useRef(new Audio(flipSound));
+  const match = useRef(new Audio(matchSound));
+
+  useEffect(() => {
+    setCardsState(data);
+  }, [data]);
 
   const showCard = id => {
     if (viewCard.length === 0 || viewCard.length % 2 !== 0) {
       isFlipped();
-
+      flip.current.play();
       const newState = cardsState.map(obj => {
         if (obj.id === id) {
           return {...obj, isBack: false};
@@ -33,6 +42,7 @@ const CardsController = props => {
         return obj;
       });
       setCardsState(newState);
+      match.current.play();
     } else {
       //it's not matched
       const newState = cardsState.map(obj => {
@@ -55,16 +65,13 @@ const CardsController = props => {
     }
   }, [checkIsMatch, viewCard]);
 
-  const isWon =
-    cardsState.filter(e => e.isBack === undefined).length === data.length;
-  // useEffect(() => {
-  //   if (isWon || timer === 0) {
-  //     console.log('game is finished');
-  //   }
-  // });
+  useEffect(() => {
+    const matched = cardsState.filter(e => e.isBack === undefined);
+    checkIsWon(matched);
+  });
 
   return (
-    <>
+    <Styled.Container>
       <Styled.CardContainer>
         {cardsState.map(card => (
           <Card
@@ -76,7 +83,7 @@ const CardsController = props => {
           />
         ))}
       </Styled.CardContainer>
-    </>
+    </Styled.Container>
   );
 };
 
