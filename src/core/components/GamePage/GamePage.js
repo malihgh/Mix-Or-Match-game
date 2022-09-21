@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import * as Styled from './styles';
 import CardsController from 'core/components/CardsController';
 import {cards} from 'core/components/CardsController/data/cards';
+import useAudio from 'core/hooks/useAudio';
 
-const timePerRound = 10;
+const timePerRound = 100;
 const game = ['START', 'PROCESS', 'END'];
 
 const GamePage = () => {
@@ -12,6 +13,15 @@ const GamePage = () => {
   const [isWon, setIsWon] = useState(false);
   const [gameStage, setGameStage] = useState(game[0]);
   const [data, setData] = useState(shuffle());
+
+  const [
+    playCreepySound,
+    pauseCreepySound,
+    playGameOverSound,
+    pauseGmeOverSound,
+    playVictorySound,
+    pauseVictorySound
+  ] = useAudio();
 
   function shuffle() {
     let shuffledArray = cards
@@ -32,13 +42,16 @@ const GamePage = () => {
         t = t < 10 && t > 0 ? '0' + t : t;
         setTimer(t);
         if (timer <= 0) {
+          //time is up
           setTimer(0);
           setGameStage(game[2]);
+          pauseCreepySound();
+          playGameOverSound();
         }
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [gameStage, timer]);
+  }, [gameStage, pauseCreepySound, playGameOverSound, timer]);
 
   const checkIsWon = matched => {
     const isAllMatched = matched.length === cards.length;
@@ -46,28 +59,31 @@ const GamePage = () => {
       if (isAllMatched) {
         setIsWon(true);
         setGameStage(game[2]);
+        pauseCreepySound();
+        playVictorySound();
       } else {
         setIsWon(false);
       }
     }
   };
-
+  const startGame = () => {
+    setGameStage(game[1]);
+    setTimer(timePerRound);
+    playCreepySound();
+  };
   const restartGame = () => {
     setGameStage(game[1]);
     setTimer(timePerRound);
     setData(shuffle());
     setFlipCounter(0);
+    playCreepySound();
+    pauseGmeOverSound();
+    pauseVictorySound();
   };
   return (
     <Styled.Page disable={gameStage !== game[1]}>
       {gameStage === game[0] && (
-        <Styled.Start
-          onClick={() => {
-            setGameStage(game[1]);
-            setTimer(timePerRound);
-          }}>
-          Click to Start
-        </Styled.Start>
+        <Styled.Start onClick={startGame}>Click to Start</Styled.Start>
       )}
       {gameStage === game[2] && !isWon && (
         <Styled.Start onClick={restartGame} isFinished={true}>
