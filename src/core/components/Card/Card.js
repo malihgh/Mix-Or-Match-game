@@ -33,7 +33,7 @@ const Card = props => {
             </Styled.FlipCard>
           ) : (
             <Styled.FlipCard isBack={false}>
-              <Styled.Card isBack={false}>
+              <Styled.Card isBack={false} isBat={id === 6 || id === 14}>
                 {corners.map((corner, index) => (
                   <Styled.ImageContainer position={corner} key={index}>
                     <Styled.Image src={CobwebGrey} position={corner} />
@@ -41,7 +41,11 @@ const Card = props => {
                 ))}
 
                 <Styled.PictureContainer>
-                  <Styled.Picture src={picture} isBack={isBack} />
+                  <Styled.Picture
+                    src={picture}
+                    isBack={isBack}
+                    isBat={id === 6 || id === 14}
+                  />
                 </Styled.PictureContainer>
               </Styled.Card>
             </Styled.FlipCard>

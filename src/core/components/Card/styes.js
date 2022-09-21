@@ -52,7 +52,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  height: 55px;
+  height: 53px;
 
   transform: ${props =>
     props.position === 'isTopRight'
@@ -63,19 +63,19 @@ export const Image = styled.img`
       ? 'rotate(180deg)'
       : 'rotate(270deg)'};
   ${Card}:hover & {
-    height: 60px;
+    height: 62px;
   }
 `;
 
 export const SpiderContainer = styled.div`
   position: absolute;
   top: 0;
-  left: 10%;
+  left: 13%;
 `;
 export const Spider = styled.img`
-  height: 145px;
+  height: 143px;
   ${Card}:hover & {
-    height: 150px;
+    height: 152px;
   }
 `;
 export const PictureContainer = styled.div`
@@ -85,7 +85,7 @@ export const PictureContainer = styled.div`
   transform: rotateY(180deg);
 `;
 export const Picture = styled.img`
-  height: 88px;
+  height: ${props => (props.isBat ? 'unset' : '85px')};
 
   @-webkit-keyframes swinging {
     0% {
@@ -119,6 +119,6 @@ export const Picture = styled.img`
   animation: ${props =>
     props.isBack === undefined && 'swinging 1s ease-in-out forwards infinite'};
   ${Card}:hover & {
-    height: 90px;
+    height: ${props => (props.isBat ? 'unset' : '93px')};
   }
 `;
