@@ -31,6 +31,41 @@ export const SmallStart = styled.div`
     font-size: 40px;
   }
 `;
+export const ButtonContainer = styled.div`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 1;
+  @media only screen and (max-width: 740px) {
+    position: relative;
+    margin: auto;
+    top: 0;
+    right: 0;
+    padding-bottom: 20px;
+  }
+`;
+
+export const Button = styled.a`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 150px;
+  padding: 8px;
+  border-radius: 6px;
+  font-family: serif;
+  text-decoration: none;
+  color: white;
+  background-color: ${props => (props.isLinkedin ? '#0077b5' : '#6e5494')};
+  margin-bottom: 8px;
+`;
+export const Icon = styled.img`
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  padding: 2px;
+  border-radius: 3px;
+  margin-right: 5px;
+`;
 
 export const Container = styled.div`
   display: flex;

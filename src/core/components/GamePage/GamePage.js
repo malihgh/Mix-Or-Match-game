@@ -3,6 +3,8 @@ import * as Styled from './styles';
 import CardsController from 'core/components/CardsController';
 import {cards} from 'core/components/CardsController/data/cards';
 import useAudio from 'core/hooks/useAudio';
+import GitHub from 'assets/Images/github.png';
+import linkedin from 'assets/Images/linkedin.png';
 
 const timePerRound = 100;
 const game = ['START', 'PROCESS', 'END'];
@@ -99,6 +101,21 @@ const GamePage = () => {
       )}
       <Styled.Container disable={gameStage !== game[1]}>
         <Styled.Title>Mix-Or-Match</Styled.Title>
+        <Styled.ButtonContainer>
+          <Styled.Button
+            href="https://github.com/malihgh/Mix-Or-Match-game"
+            target="_blank">
+            <Styled.Icon src={GitHub} />
+            <span>View GitHub</span>
+          </Styled.Button>
+          <Styled.Button
+            href="https://www.linkedin.com/in/maliheh-ghasemian-2a04391a5/"
+            target="_blank"
+            isLinkedin>
+            <Styled.Icon src={linkedin} />
+            <span>View Linkedin</span>
+          </Styled.Button>
+        </Styled.ButtonContainer>
         <Styled.TextContainer>
           <Styled.Text> Timer {timer}</Styled.Text>
           <Styled.Text> flip {flipCounter}</Styled.Text>
