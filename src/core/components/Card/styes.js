@@ -58,10 +58,10 @@ export const Image = styled.img`
     props.position === 'isTopRight'
       ? 'rotate(0deg)'
       : props.position === 'isBottomRight'
-      ? 'rotate(90deg)'
-      : props.position === 'isBottomLeft'
-      ? 'rotate(180deg)'
-      : 'rotate(270deg)'};
+        ? 'rotate(90deg)'
+        : props.position === 'isBottomLeft'
+          ? 'rotate(180deg)'
+          : 'rotate(270deg)'};
   ${Card}:hover & {
     height: 62px;
   }
@@ -118,7 +118,4 @@ export const Picture = styled.img`
 
   animation: ${props =>
     props.isBack === undefined && 'swinging 1s ease-in-out forwards infinite'};
-  ${Card}:hover & {
-    height: ${props => (props.isBat ? 'unset' : '93px')};
-  }
 `;
